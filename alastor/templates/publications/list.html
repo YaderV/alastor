@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block content %}
+<article class="main-article">
+  <header class="text-center">
+    <h2>Libros</h2>
+  </header>
+  <div class="content">
+    <section class="body">
+      <div class="row">
+        {% for publication in publications %}
+        <div class="col-sm-12 publication-grid">
+          <div class="row">
+            <div class="col-sm-2">
+              <figure>
+                {% thumbnail publication.cover "140x210" crop="center" as im %}
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                {% endthumbnail %}
+              </figure>
+            </div>
+            <div class="col-sm-10">
+              <h3>{{ publication.name }}</h3>
+              <div class="col-sm-6">
+                <p class="publication-link">Autor: <a href="{% url 'authors:detail' publication.author.id %}">{{ publication.author }}</a></p>
+                <p class="publication-link">Edición <a class="publication-edition" href="{{ publication.edition.get_absolute_url }}">{{ publication.edition.number }} - {{ publication.edition.get_date }}</a></p>
+                <p class="download-link"><a href="{{ publication.archivo.url }}" target="_blank" class="btn btn-primary"><i class="fa fa-download"></i>  Descargar</a></p>
+              </div>
+              <div class="col-sm-6 publication-description">
+                {{ publication.description|safe }}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+  </div>
+  {% endblock %}

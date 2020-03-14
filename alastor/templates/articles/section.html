@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load thumbnail articles_tags %}
+{% block content %}
+<div class="version-list">
+  {% for edition in editions %}
+    <div class="version-box">
+      <a href="{{ edition.get_absolute_url }}">
+        <figure>
+          {% thumbnail edition.cover "80x80" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+          {% endthumbnail %}
+        </figure>
+        <p class="edition-number">No. {{ edition.number }}</p>
+        <p class="edition-date">{{ edition.get_date }}</p>
+      </a>
+    </div>
+  {% endfor %}
+</div>
+<div class="content">
+  <section class="section">
+    <div class="row">
+      {% for article in edition_articles %}
+        <div class="col-xs-12 section-block">
+          <div class="row">
+            <div class="col-sm-6 col-xs-12">
+              <figure>
+                {% thumbnail article.image "600x300" crop="center" as im %}
+                  <a href="{{ article.get_absolute_url }}"><img src="{{ im.url }}" class="img-responsive"></a>
+                {% endthumbnail %}
+              </figure>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <section class="text-center full-section">
+                <h3 class="grid-title"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
+                <p class="grid-author">Por <a href="{% url 'authors:detail' article.author.id %}">{{ article.author }}</a></p>
+                <p>{{ article.introduction|safe|truncatewords:20 }}</p>
+              </section>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% if old_articles %}
+    <section class="section">
+      <h2 class="previous-title">Publicado en otras ediciones</h2>
+      <div class="row">
+        {% for article in old_articles %}
+          <div class="col-sm-4 col-xs-12">
+            <figure>
+              {% thumbnail article.image "600x300" crop="center" as im %}
+                <a href="{{ article.get_absolute_url }}"><img src="{{ im.url }}" class="img-responsive"></a>
+              {% endthumbnail %}
+            </figure>
+            <section class="text-center">
+              <h3 class="grid-title"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
+              <p class="grid-author">Por <a href="">{{ article.author }}</a></p>
+              <p>{{ article.introduction|safe|truncatewords:20 }}</p>
+            </section>
+          </div>
+        {% endfor %}
+      </div> 
+    </section>
+  {% endif %}
+</div>
+{% endblock %}

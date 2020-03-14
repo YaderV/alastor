@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block content %}
+<article class="main-article">
+  <header class="text-center">
+    <h2>{{ flatpage.title }}</h2>
+  </header>
+  <div class="content">
+    <section class="body">
+      {{ flatpage.content|safe }}
+    </section>
+  </div>
+</article>
+{% endblock %}

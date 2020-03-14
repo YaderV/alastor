@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block content %}
+<div class="content">
+  <section class="author-section section">
+    <header>
+    {% thumbnail author.photo "100x100" crop="center" as im %}
+      <img src="{{ im.url }}" class="img-responsive img-circle">
+    {% endthumbnail %}
+    <h2>{{ author.name }}</h2>
+    </header>
+    <hr />
+    <p class="author-bio">{{ author.bio|safe }}</p>
+    <div class="row">
+      {% for article in author.article_set.all %}
+        <div class="col-xs-12 section-block">
+          <div class="row">
+            <div class="col-sm-6 col-xs-12">
+              <figure>
+                {% thumbnail article.image "600x300" crop="center" as im %}
+                  <a href="{{ article.get_absolute_url }}"><img src="{{ im.url }}" class="img-responsive"></a>
+                {% endthumbnail %}
+              </figure>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <section class="text-center full-section">
+                <h3 class="grid-title"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
+                <p class="grid-author">En <a href="">{{ article.section.name }}</a></p>
+                <p>{{ article.introduction|safe|truncatewords:20 }}</p>
+              </section>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+</div<
+{% endblock %}

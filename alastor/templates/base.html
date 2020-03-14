@@ -1,0 +1,110 @@
+{% load staticfiles i18n %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}Alastor{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Revista de literatura">
+    <meta name="author" content="Yader Velasquez">
+
+    {% block meta %}
+    {% endblock %}
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="{% static 'css/project.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    {% block css %}
+    {% endblock %}
+
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <div class="top-header">
+          <div class="secondary-menu pull-left">
+            <ul>
+              <li><a href="/presentacion/">Presentación</a></li> |
+              <li><a href="{% url 'publications:index' %}">Libros</a></li>
+            </ul>
+          </div>
+          <div class="social-menu pull-right">
+            <ul>
+              <li><a href="https://www.facebook.com/alastorliterario/"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+              <li><a href="https://twitter.com/AlastorRevista"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <h1><a href="/"><img src="{% static 'images/logo.png'%}" />Álastor</a></h1>
+        <nav class="navbar navbar-default">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-menu">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="top-menu">
+            <p class="mobile-section-header"><strong>Secciones</strong></p>
+            <ul class="nav navbar-nav">
+              {% for section in nav_sections %}
+                <li><a href="{{ section.get_absolute_url }}">{{ section.name }}</a></li>
+              {% endfor %}
+            </ul>
+            <p class="mobile-section-header"><strong>Ediciones</strong></p>
+            <ul class="nav navbar-nav edition-mobile">
+            {% for edition in editions %}
+              <li><a href="{{ edition.get_absolute_url }}">{{ edition.number }} - {{ edition.get_date }}</a></li>
+            {% endfor %}
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <main role="main">
+      {% block content %}
+      {% endblock %}
+      </main>
+      <footer class="footer">
+        <div class="pull-right">
+          <p>
+            <a href="https://twitter.com/AlastorRevista"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
+            <a href="https://www.facebook.com/alastorliterario/"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+            Alastor - 2016
+          </p>
+        </div>
+      </footer>
+    </div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-80685359-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script charset="utf-8">
+      if ($('.version-list').length) {
+        $('.version-list').slick({
+          slidesToShow: 6,
+          slidesToScroll: 2
+        });
+      }
+    </script>
+    <script type="text/javascript" charset="utf-8" src="{% static 'js/project.min.js' %}"></script>
+    {% block javascript %}
+    {% endblock javascript %}
+  </body>
+</html>
+

@@ -1,0 +1,26 @@
+{% load thumbnail %}
+<div id="author-block">
+  <div class="row">
+    <h2>~ Colaboradores ~</h2>
+    {% for author in author_list %}
+    <div class="col-sm-3 col-xs-6 ">
+      <figure>
+        {% thumbnail author.photo "100x100" crop="center" as im %}
+          <a href="{% url 'authors:detail' author.id %}"><img src="{{ im.url }}" class="img-responsive img-circle"></a>
+        {% endthumbnail %}
+      </figure>
+      <h3 class="text-center"><a href="{% url 'authors:detail' author.id %}">{{ author.name }}</a></h3>
+    </div>
+    {% cycle '' '' '' '<div class="clearfix"></div>' %}
+    {% endfor %}
+  </div>
+  <hr />
+  <div class="row">
+    {% for author in author_old %}
+    <div class="col-sm-4 col-xs-6">
+      <h4 class="text-center"><a href="{% url 'authors:detail' author.id %}">{{ author.name }}</a></h4>
+    </div>
+    {% cycle '' '' '<div class="clearfix"></div>' %}
+    {% endfor %}
+  </div>
+</div>

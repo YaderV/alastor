@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static thumbnail %}
+{% block meta %}
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@alastorliteral" />
+  <meta name="twitter:title" content="{{ article.title }}" />
+  <meta name="twitter:description" content="{{ article.introduction|safe }}" />
+  {% if article.image %}
+  <meta name="twitter:image" content="{{ article.image.url }}" />
+  {% endif %}
+
+  <meta property="og:url" content="{{ article.get_absolute_url }}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="{{ article.title }}" />
+  <meta property="og:description" content="{{ article.introduction|safe }}" />
+  {% if article.image %}
+  <meta property="og:image" content="{{ article.image.url }}" />
+  {% endif %}
+{% endblock meta %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.0/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.0/slick/slick-theme.css"/>
+{% endblock %}
+{% block content %}
+<article class="main-article">
+  <header class="text-center">
+    <p class="article-section-title article-info"><a href="{{ article.section.get_absolute_url }}">{{ article.section.name }}</a></p>
+    <p class="article-info"><a href="{{ article.edition.get_absolute_url }}">No. {{ article.edition.number }}</a></p>
+    <h2>{{ article.title }}</h2>
+    <p class="article-author">Por <a href="{% url 'authors:detail' article.author.id %}">{{ article.author.name }}</a></p>
+  </header>
+  <div class="content">
+    <section class="introduction">
+      {{ article.introduction|safe }}
+    </section>
+    <figure class="article-img">
+      {% thumbnail article.image "700" as im %}
+        <img src="{{ im.url }}" class="img-responsive center-block">
+      {% endthumbnail %}
+      {% if article.image_caption %}<figcaption class="text-center image-caption">{{ article.image_caption|safe }}</figcaption>{% endif %}
+    </figure>
+    <section class="body">
+      {% if article.is_translation %}
+      <div class="row">
+        <div class="col-md-6">{{ article.translation_body|safe }}</div>
+        <div class="col-md-6">{{ article.body|safe }}</div>
+      </div>
+      {% else %}
+        {{ article.body|safe }}
+      {% endif %}
+
+      {% if article.imagearticle_set.count %}
+        <div class="gallery">
+          {% for i in article.imagearticle_set.all %}
+            <div>
+              {% thumbnail i.image "x600" as im %}
+                <img src="{{ im.url }}" class="img-responsive" />
+              {% endthumbnail %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </section>
+  </div>
+  <footer>
+    <div class="share-icons">
+      <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+      <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+    </div>
+    <section class="author-bio">
+      {% if article.translator %}
+        <h3>Traductor: <a href="#">{{ article.translator.name }}</a></h3>
+        <figure class="pull-left">
+          {% thumbnail article.translator.photo "100x100" crop="center" as im %}
+            <a href="#"><img src="{{ im.url }}" class="img-responsive img-circle"></a>
+          {% endthumbnail %}
+        </figure>
+        {{ article.translator.bio|safe }}
+        <div class="clearfix"></div>
+        <hr>
+      {% endif %}
+      <h3>{% if article.translator %}Autor: {% endif %}<a href="#">{{ article.author.name }}</a></h3>
+      <figure class="pull-left">
+        {% thumbnail article.author.photo "100x100" crop="center" as im %}
+          <a href="#"><img src="{{ im.url }}" class="img-responsive img-circle"></a>
+        {% endthumbnail %}
+      </figure>
+      {{ article.author.bio|safe }}
+    </section>
+    <div class="clearfix"></div>
+  </footer>
+</article>
+{% endblock %}
+{% block javascript %}
+  <script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.0/slick/slick.min.js"></script>
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+      $('.gallery').slick({
+        dots: true,
+        infinite: true,
+        speed: 300,
+        variableWidth: true,
+        centerMode: true,
+      });
+    });
+  </script>
+{% endblock %}
