@@ -15,8 +15,7 @@ urlpatterns = [
         include(('alastor.publications.urls', 'publications'),
                 namespace='publications')),
     url(settings.ADMIN_URL, admin.site.urls),
-    url(r'^ckeditor/', include(
-        ('ckeditor_uploader.urls', 'ckeditor_uploader'))),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^select2/', include(
         ('django_select2.urls', 'django_select2'))),
 
