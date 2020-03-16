@@ -5,11 +5,9 @@
   {% for edition in editions %}
     <div class="version-box">
       <a href="{{ edition.get_absolute_url }}">
-        <figure>
-          {% thumbnail edition.cover "80x80" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-          {% endthumbnail %}
-        </figure>
+        {% thumbnail edition.cover "80x80" crop="center" as im %}
+          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="mx-auto d-block rounded">
+        {% endthumbnail %}
         <p class="edition-number">No. {{ edition.number }}</p>
         <p class="edition-date">{{ edition.get_date }}</p>
       </a>
