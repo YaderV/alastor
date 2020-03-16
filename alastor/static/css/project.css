@@ -118,45 +118,38 @@ header nav .navbar-nav li a {
   font-size: 14px;
   color: #df3331;
 }
-.content .section {
+.section-list {
   margin: 30px 0 60px 0;
 }
-.content .section .section-title {
+.section-list .section-title {
   text-transform: uppercase;
   text-align: center;
   font-size: 23px;
   margin: 42px 0 62px 0;
 }
-.content .section .section-title.no-margin-top {
+.section-list .section-title.no-margin-top {
   margin-top: 5px;
 }
-.content .section .previous-title {
+.section-list .previous-title {
   text-transform: uppercase;
   font-size: 23px;
   margin-bottom: 20px;
   padding-bottom: 10px;
   border-bottom: 1px solid #ccc;
 }
-.content .section .section-block {
+.section-list .section-block {
   margin-top: 20px;
 }
-.content .full-section {
+.full-section {
   padding: 35px 60px 0 60px;
 }
-.content .full-section h3 {
+.full-section h3 {
   font-size: 30px;
 }
-.content .grid-title {
-  text-transform: uppercase;
+.article-card .article-title a {
+  color: #212529;
 }
-.content .grid-title a {
-  color: #000;
-}
-.content .grid-author {
-  color: #df3331;
-  font-size: 16px;
-}
-.content .grid-author a {
+.article-card .article-author a {
   color: #df3331;
 }
 /* Article Content */

@@ -3,55 +3,36 @@
   {% if type == 'full' %}
     {% for article in articles %}
     <div class="col-12">
-      <div class="row">
-        <div class="col-sm-6 col-xs-12">
-          <figure>
-            {% thumbnail article.image "600x300" crop="center" as im %}
-              <a href="{{ article.get_absolute_url }}"><img src="{{ im.url }}" class="img-responsive"></a>
+      <div class="card article-card border-0">
+        <div class="row no-gutters">
+          <div class="col-sm-6 col-xs-12">
+            {% thumbnail article.image "800x400" crop="center" as im %}
+              <a href="{{ article.get_absolute_url }}"><img src="{{ im.url }}" class="img-fluid"></a>
             {% endthumbnail %}
-          </figure>
-        </div>
-        <div class="col-sm-6 col-xs-12">
-          <section class="text-center full-section">
-            <h3 class="grid-title"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
-            <p class="grid-author">Por <a href="{% url 'authors:detail' article.author.id %}">{{ article.author }}</a></p>
-            <p>{{ article.introduction|safe|truncatewords:20 }}</p>
-          </section>
+          </div>
+          <div class="col-sm-6 col-xs-12 p-4">
+            <h4 class="article-title text-center"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h4>
+            <p class="article-author text-center mb-4">Por <a href="{% url 'authors:detail' article.author.id %}">{{ article.author }}</a></p>
+            <p class="pt-4">{{ article.introduction|striptags|safe|truncatewords:20 }}</p>
+          </div>
         </div>
       </div>
     </div>
     {% endfor %}
-  {% elif type == 'double' %}
+  {% else %}
     {% for article in articles %}
-      <div class="col-sm-6 col-xs-12">
-        <figure>
-          {% thumbnail article.image "600x300" crop="center" as im %}
-            <a href="{{ article.get_absolute_url }}"><img src="{{ im.url }}" class="img-responsive"></a>
+      <div class="{% if type == "double" %}col-sm-6{% elif type == "triple" %}col-sm-4{% endif %} col-xs-12">
+        <div class="card article-card border-0">
+          {% thumbnail article.image "800x400" crop="center" as im %}
+            <a href="{{ article.get_absolute_url }}"><img src="{{ im.url }}" class="card-img-top img-fluid"></a>
           {% endthumbnail %}
-        </figure>
-        <section class="text-center">
-          <h3 class="grid-title"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
-          <p class="grid-author">Por <a href="{% url 'authors:detail' article.author.id %}">{{ article.author }}</a></p>
-          <p>{{ article.introduction|safe|truncatewords:20 }}</p>
-        </section>
+          <div class="card-body">
+            <h4 class="article-title text-center"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h4>
+            <p class="article-author text-center">Por <a href="{% url 'authors:detail' article.author.id %}">{{ article.author }}</a></p>
+            <p class="card-text text-justify">{{ article.introduction|striptags|safe|truncatewords:20 }}</p>
+          </div>
+        </div>
       </div>
-      {% cycle '' '<div class="clearfix"></div>' %}
-    {% endfor %}
-  {% elif type == 'triple' %}
-    {% for article in articles %}
-      <div class="col-sm-4 col-xs-12">
-        <figure>
-          {% thumbnail article.image "600x300" crop="center" as im %}
-            <a href="{{ article.get_absolute_url }}"><img src="{{ im.url }}" class="img-responsive"></a>
-          {% endthumbnail %}
-        </figure>
-        <section class="text-center">
-          <h3 class="grid-title"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
-          <p class="grid-author">Por <a href="{% url 'authors:detail' article.author.id %}">{{ article.author }}</a></p>
-          <p>{{ article.introduction|safe|truncatewords:20 }}</p>
-        </section>
-      </div>
-      {% cycle '' '' '<div class="clearfix"></div>' %}
     {% endfor %}
   {% endif %}
 </div>

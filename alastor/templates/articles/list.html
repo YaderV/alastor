@@ -16,33 +16,34 @@
     </div>
   {% endfor %}
 </div>
-<div class="content">
+
+<div>
   {% if narrativa %}
-  <section class="section">
+  <section class="section-list">
     <h2 class="section-title no-margin-top">~ Narrativa ~</h2>
     {% show_grid narrativa %}
   </section>
   {% endif %}
   {% if poesia %}
-  <section class="section">
+  <section class="section-list">
     <h2 class="section-title">~ Poesía ~</h2>
     {% show_grid poesia %}
   </section>
   {% endif %}
   {% if impresiones %}
-  <section class="section">
+  <section class="section-list">
     <h2 class="section-title">~ Impresiones ~</h2>
     {% show_grid impresiones %}
   </section>
   {% endif %}
   {% if resena %}
-  <section class="section">
+  <section class="section-list">
     <h2 class="section-title">~ Reseña ~</h2>
     {% show_grid resena %}
   </section>
   {% endif %}
   {% if ensayo %}
-  <section class="section">
+  <section class="section-list">
     <h2 class="section-title">~ Ensayo ~</h2>
     {% show_grid ensayo %}
   </section>
