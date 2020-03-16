@@ -1,28 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy:400,400italic&subset=latin,latin-ext);
-@font-face {
-  font-family: "Copperplate Gothic Bold V1";
-  src: url("../fonts/copperplate.eot");
-  /* IE9*/
-  src: url("../fonts/copperplate.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */ url("../fonts/copperplate.woff2") format("woff2"), /* chrome、firefox */ url("../fonts/copperplate.woff") format("woff"), /* chrome、firefox */ url("../fonts/copperplate.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url("../fonts/copperplate.svg#Copperplate Gothic Bold V1") format("svg");
-  /* iOS 4.1- */
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-  font-family: 'Sorts Mill Goudy', serif !important;
-}
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
 body {
-  font-family: 'Sorts Mill Goudy', serif !important;
-  font-size: 16px;
+  font-family: 'Playfair Display', serif;
 }
 .container {
   padding: 0;
@@ -55,7 +33,6 @@ header .top-header .secondary-menu a {
   font-weight: bold;
 }
 header h1 {
-  font-family: 'Copperplate Gothic Bold V1', serif !important;
   font-size: 55px;
   text-transform: uppercase;
   letter-spacing: 2px;

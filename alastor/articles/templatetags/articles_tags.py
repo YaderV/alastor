@@ -11,7 +11,7 @@ def show_grid(articles):
     elif articles.count() % 2 == 0:
         grid_type = 'double'
     else:
-        grid_type = 'third'
+        grid_type = 'triple'
 
     return {
         'articles': articles,
