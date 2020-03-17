@@ -60,28 +60,14 @@ header nav {
   border-radius: 0 !important;
   background-color: #fff !important;
 }
-header nav .mobile-section-header {
-  display: none;
+header nav .navbar-nav .nav-link {
+  color: #000 !important;
 }
-header nav .edition-mobile {
-  display: none;
-}
-header nav .navbar-nav {
-  width: 100%;
-  text-align: center;
-}
-header nav .navbar-nav .fixed-logo {
-  display: none;
-}
-header nav .navbar-nav li {
-  text-transform: uppercase;
-  font-size: 16px;
-  display: inline-block;
-  width: 20%;
-}
-header nav .navbar-nav li a {
+header nav .navbar-nav a {
   background: inherit;
-  color: #000;
+}
+header nav .navbar-nav a:hover {
+  text-decoration: underline;
 }
 .version-list {
   padding: 0 30px;
