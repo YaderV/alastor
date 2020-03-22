@@ -1,20 +1,6 @@
 {% extends "base.html" %}
 {% load thumbnail articles_tags %}
 {% block content %}
-<div class="version-list">
-  {% for edition in editions %}
-    <div class="version-box">
-      <a href="{{ edition.get_absolute_url }}">
-        {% thumbnail edition.cover "80x80" crop="center" as im %}
-          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="mx-auto d-block rounded">
-        {% endthumbnail %}
-        <p class="edition-number">No. {{ edition.number }}</p>
-        <p class="edition-date">{{ edition.get_date }}</p>
-      </a>
-    </div>
-  {% endfor %}
-</div>
-
 <div>
   {% if narrativa %}
   <section class="section-list">

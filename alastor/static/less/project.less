@@ -1,39 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
 body {
   font-family: 'Playfair Display', serif;
 }
 
-.container {
-  padding: 0;
+.container-fluid {
+  overflow: hidden;
 }
 
 header {
   width: inherit;
-  .top-header {
-    padding: 0 10px 0 10px;
-    height: 50px;
-    ul {
-      list-style: none;
-      padding: 0;
-      li {
-        display: inline;
-      }
+  #general-nav {
+    font-family: 'Source Sans Pro', sans-serif !important;
+    .social-icon {
+      font-size: 2em;
     }
-    .social-menu {
-      a {
-        color: #777;
-        font-size: 30px;
-      }
-    }
-    .secondary-menu {
-      margin-top: 10px;
-      a {
-        color: #777;
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: bold;
-      }
-    }
+  }
+
+  #logo {
+    height: 180px;
+    padding-top: 48px;
   }
 
   h1 {
@@ -57,13 +43,14 @@ header {
     }
   }
 
-  nav {
+  #section-nav {
     border-top: 5px double #000 !important;
     border-bottom: 5px double #000 !important;
     border-right: 0 !important;
     border-left: 0 !important;
     border-radius: 0 !important;
     background-color: #fff !important;
+    font-size: 18px;
 
     .navbar-nav {
       .nav-link {
@@ -73,6 +60,7 @@ header {
         background: inherit;
         &:hover {
           text-decoration: underline;
+          background: #f6f6f6;
         }
       }
     }
@@ -80,7 +68,6 @@ header {
 }
 
 .version-list {
-  padding: 0 30px;
   margin: 0 30px 0 30px;
   .version-box {
     display: inline-block;
@@ -229,28 +216,6 @@ header {
   padding-top: 20px;
   a {
     color: #000;
-  }
-}
-
-.menu-top-fixed {
-  position: fixed;
-  top: 0;
-  width: inherit;
-  background-color: #fff;
-  border-top: 0 !important;
-  border-bottom-color: #dedede;
-  z-index: 10000;
-  li {
-    width: 16% !important;
-  }
-  .fixed-logo {
-    display: inline-block !important;
-    width: 20%;
-    a {
-      color: #000 !important;
-      font-size: 22px;
-      text-transform: capitalize;
-    }
   }
 }
 

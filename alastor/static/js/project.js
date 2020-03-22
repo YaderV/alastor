@@ -1,15 +1,12 @@
 /* Project specific Javascript goes here. */
 jQuery(document).ready(function($) {
-  var menu = $('.navbar-default');
-  // var home = $('.nav-secondary ul li:first-child');
+  var menu = $('#general-nav .dropdown');
   $(document).scroll(function() {
     if ($(this).scrollTop() > 195) {
-      $(menu).addClass('menu-top-fixed');
-      // $(home).show();
+      $(menu).removeClass('d-none');
     }
     else {
-      $(menu).removeClass('menu-top-fixed');
-      // $(home).hide();
+      $(menu).addClass('d-none');
     }
   });
   if ($('.version-list').length) {

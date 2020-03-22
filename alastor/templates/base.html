@@ -1,4 +1,4 @@
-{% load staticfiles i18n %}
+{% load thumbnail staticfiles i18n %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -27,36 +27,67 @@
   </head>
 
   <body>
-    <div class="container-fluid">
+    <div class="container-fluid p-0">
       <header>
-        <div class="top-header">
-          <div class="secondary-menu pull-left">
-            <ul>
-              <li><a href="/presentacion/">Presentación</a></li> |
-              <li><a href="{% url 'publications:index' %}">Libros</a></li>
+        <!-- Top nav -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top pt-0 pb-0" id="general-nav">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#general-menu" aria-controls="general-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse mr-auto" id="general-menu">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link text-uppercase active" href="#">Portada</a></li>
+              <li class="nav-item"><a class="nav-link text-uppercase" href="/presentacion/">Presentación</a></li>
+              <li class="nav-item"><a class="nav-link text-uppercase" href="{% url 'publications:index' %}">Descarga de Libros</a></li>
+              <li class="nav-item"><a class="nav-link text-uppercase" href="#">Colaboraciones</a></li>
+              <li class="nav-item"><a class="nav-link text-uppercase" href="#">Lo último</a></li>
+              <li class="nav-item"><a class="nav-link text-uppercase" href="#">La movida</a></li>
+              <li class="nav-item dropdown d-none">
+                <a class="nav-link dropdown-toggle text-uppercase" href="#" id="section-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Secciones
+                </a>
+                <div class="dropdown-menu" aria-labelledby="section-dropdown">
+                  {% for section in nav_sections %}
+                  <a class="dropdown-item" href="{{ section.get_absolute_url }}">{{ section.name }}</a>
+                  {% endfor %}
+                </div>
+              </li>
             </ul>
           </div>
-          <div class="social-menu pull-right">
-            <ul>
-              <li><a href="https://www.facebook.com/alastorliterario/"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
-              <li><a href="https://twitter.com/AlastorRevista"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
-            </ul>
-          </div>
+          <a class="text-white social-icon mr-2" href="https://www.facebook.com/alastorliterario/"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+          <a class="text-white social-icon" href="https://twitter.com/AlastorRevista"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
+        </nav>
+        <div id="logo">
+          <h1 class="mt-4"><a href="/"><img src="{% static 'images/logo.png'%}" />Álastor</a></h1>
         </div>
-        <h1><a href="/"><img src="{% static 'images/logo.png'%}" />Álastor</a></h1>
-        <nav class="navbar navbar-expand-sm navbar-light">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#section-menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- Section nav -->
+        <nav id="section-nav" class="navbar navbar-expand-sm navbar-light p-0">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#section-menu" aria-controls="section-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="section-menu">
             <ul id="menu-main-nav" class="navbar-nav nav-fill w-100">
               {% for section in nav_sections %}
-                <li class="nav-item"><a class="nav-link" href="{{ section.get_absolute_url }}">{{ section.name }}</a></li>
+                <li class="nav-item"><a class="nav-link text-uppercase" href="{{ section.get_absolute_url }}">{{ section.name }}</a></li>
               {% endfor %}
             </ul>
           </div>
         </nav>
       </header>
+      <div class="version-list">
+        {% for edition in editions %}
+          <div class="version-box">
+            <a href="{{ edition.get_absolute_url }}">
+              {% thumbnail edition.cover "80x80" crop="center" as im %}
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="mx-auto d-block rounded-circle">
+              {% endthumbnail %}
+              <p class="edition-number">No. {{ edition.number }}</p>
+              <p class="edition-date">{{ edition.get_date }}</p>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+
       <main role="main">
       {% block content %}
       {% endblock %}
@@ -80,19 +111,10 @@
       ga('create', 'UA-80685359-1', 'auto');
       ga('send', 'pageview');
     </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    <script charset="utf-8">
-      if ($('.version-list').length) {
-        $('.version-list').slick({
-          slidesToShow: 6,
-          slidesToScroll: 2
-        });
-      }
-    </script>
     <script type="text/javascript" charset="utf-8" src="{% static 'js/project.min.js' %}"></script>
     {% block javascript %}
     {% endblock javascript %}
