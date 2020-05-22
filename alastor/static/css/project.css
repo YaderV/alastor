@@ -10,6 +10,7 @@ header {
   width: inherit;
 }
 header #general-nav {
+  background-color: #000 !important;
   font-family: 'Source Sans Pro', sans-serif !important;
 }
 header #general-nav .social-icon {
@@ -217,23 +218,16 @@ header #section-nav .navbar-nav a:hover {
     display: none !important;
   }
 }
-#author-block {
-  border-top: 1px solid #ccc;
+#author-title-block {
+  background-color: #000;
 }
-#author-block h2 {
-  margin-bottom: 20px;
+#author-title-block h2 {
   font-size: 22px;
   text-align: center;
   text-transform: uppercase;
 }
-#author-block img {
-  margin: 0 auto;
-}
-#author-block h3 {
-  font-size: 20px;
-}
-#author-block a {
-  color: #df3331;
+#author-block {
+  background-color: #121212;
 }
 .author-section .author-bio {
   text-align: justify;

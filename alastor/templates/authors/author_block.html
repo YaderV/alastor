@@ -1,26 +1,19 @@
 {% load thumbnail %}
-<div id="author-block">
-  <div class="row">
-    <h2>~ Colaboradores ~</h2>
-    {% for author in author_list %}
-    <div class="col-sm-3 col-xs-6 ">
-      <figure>
+<div id="author-title-block" class="align-middle">
+  <h2 class="text-white mb-0 pt-4 pb-4">Colaboradores</h2>
+</div>
+<div id="author-block" class="p-4">
+  <div class="container">
+    <div class="row pt-1">
+      {% for author in author_list %}
+      <div class="col-sm-2 col-xs-6 mb-1">
         {% thumbnail author.photo "100x100" crop="center" as im %}
-          <a href="{% url 'authors:detail' author.id %}"><img src="{{ im.url }}" class="img-responsive img-circle"></a>
+          <a href="{% url 'authors:detail' author.id %}"><img src="{{ im.url }}" class="mx-auto d-block rounded"></a>
         {% endthumbnail %}
-      </figure>
-      <h3 class="text-center"><a href="{% url 'authors:detail' author.id %}">{{ author.name }}</a></h3>
+        <p class="text-center text-wrap pt-3"><a class="text-white" href="{% url 'authors:detail' author.id %}">{{ author.name }}</a></p>
+      </div>
+      {% endfor %}
     </div>
-    {% cycle '' '' '' '<div class="clearfix"></div>' %}
-    {% endfor %}
-  </div>
-  <hr />
-  <div class="row">
-    {% for author in author_old %}
-    <div class="col-sm-4 col-xs-6">
-      <h4 class="text-center"><a href="{% url 'authors:detail' author.id %}">{{ author.name }}</a></h4>
-    </div>
-    {% cycle '' '' '<div class="clearfix"></div>' %}
-    {% endfor %}
+    <p class="text-right h5"><a href="#" class="text-white">Ver todos los autores</a></p>
   </div>
 </div>
