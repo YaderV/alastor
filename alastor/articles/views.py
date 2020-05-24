@@ -2,6 +2,7 @@ from django.views.generic import ListView, DetailView
 from django.db.models import Count
 from django.shortcuts import redirect
 from alastor.editions.models import Edition
+from alastor.publications.models import Publication
 from .models import Article, Section, Author
 
 
@@ -42,7 +43,8 @@ class ArticleListView(ArticleBaseView):
     def get_context_data(self, **kwargs):
         context = super(ArticleListView, self).get_context_data(**kwargs)
         context['author_list'] = self.author_list.filter(article__edition=self.edition)
-        context['author_old'] = self.author_list.exclude(article__edition=self.edition)
+        # context['author_old'] = self.author_list.exclude(article__edition=self.edition)
+        context['books'] = Publication.objects.filter(promoted=True)[:4]
         return context
 
 

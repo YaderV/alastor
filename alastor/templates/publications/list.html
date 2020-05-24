@@ -22,7 +22,6 @@
               <h3>{{ publication.name }}</h3>
               <div class="col-sm-6">
                 <p class="publication-link">Autor: <a href="{% url 'authors:detail' publication.author.id %}">{{ publication.author }}</a></p>
-                <p class="publication-link">Edición <a class="publication-edition" href="{{ publication.edition.get_absolute_url }}">{{ publication.edition.number }} - {{ publication.edition.get_date }}</a></p>
                 <p class="download-link"><a href="{{ publication.archivo.url }}" target="_blank" class="btn btn-primary"><i class="fa fa-download"></i>  Descargar</a></p>
               </div>
               <div class="col-sm-6 publication-description">
