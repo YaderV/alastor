@@ -121,6 +121,12 @@ header #section-nav .navbar-nav a:hover {
 .book-title:hover {
   color: #df3331;
 }
+#publication-block {
+  background-color: #f3f3f3;
+}
+#publication-block .card {
+  background-color: #f3f3f3;
+}
 /* Article Content */
 .main-article .article-info a {
   color: #df3331;
@@ -138,6 +144,7 @@ header #section-nav .navbar-nav a:hover {
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
   margin-bottom: 20px;
+  min-height: 176px;
 }
 .main-article header h2 {
   text-transform: uppercase;
@@ -180,7 +187,7 @@ header #section-nav .navbar-nav a:hover {
 .main-article .author-bio h3 {
   margin-bottom: 20px;
 }
-.main-article .author-bio a {
+.main-article .author-bio .author-name {
   color: #df3331;
 }
 .main-article .author-bio figure {
@@ -287,4 +294,13 @@ header #section-nav .navbar-nav a:hover {
 .slick-next:before {
   content: '→';
   color: black;
+}
+#article-header {
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+}
+#article-content {
+  background-color: #fff;
+  margin-top: -200px;
 }

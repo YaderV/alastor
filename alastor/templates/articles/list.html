@@ -35,9 +35,9 @@
 </div>
 {% include "authors/author_block.html" %}
 <div class="align-middle">
-  <h2 class="mb-0 pt-4 pb-3 text-center text-uppercase">Publicaciones</h2>
+  <h2 class="mb-0 pt-4 pb-4 text-center text-uppercase">Publicaciones</h2>
 </div>
-<div class="p-4">
+<div class="p-4" id="publication-block">
   <div class="container">
     <div class="row">
       {% for i in books %}
@@ -51,9 +51,10 @@
               </div>
               <div class="col-md-8">
                 <div class="card-body">
-                  <h5 class="card-title"><a href="#" class="book-title">{{ i.name }}</a></h5>
+                  <h5 class="card-title"><a href="{% url 'authors:detail' i.id %}" class="book-title">{{ i.name }}</a></h5>
+                  <p class="card-text">{{ i.description|safe|truncatewords_html:15 }}</p>
                   <p class="card-text"><small class="text-mute">{{ i.author.name }}</small></p>
-                  <a href="#" class="btn btn-sm btn-secondary text-middle">Ver más</a>
+                  <a href="{% url 'authors:detail' i.id %}" class="btn btn-sm btn-secondary text-middle">Ver más</a>
                 </div>
               </div>
             </div>
