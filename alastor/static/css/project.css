@@ -245,15 +245,9 @@ header #section-nav .navbar-nav a:hover {
 .author-section .author-bio {
   text-align: justify;
 }
-.author-section header {
-  height: 100px;
-}
-.author-section img {
-  float: left;
-}
 .author-section h2 {
   display: inline-block;
-  margin: 36px 0 0 20px;
+  margin: 16px 0 0 20px;
   text-transform: uppercase;
 }
 .gallery {

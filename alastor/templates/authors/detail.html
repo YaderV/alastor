@@ -1,38 +1,38 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 {% block content %}
-<div class="content">
-  <section class="author-section section">
-    <header>
-    {% thumbnail author.photo "100x100" crop="center" as im %}
-      <img src="{{ im.url }}" class="img-responsive img-circle">
-    {% endthumbnail %}
-    <h2>{{ author.name }}</h2>
-    </header>
-    <hr />
-    <p class="author-bio">{{ author.bio|safe }}</p>
-    <div class="row">
-      {% for article in author.article_set.all %}
-        <div class="col-xs-12 section-block">
-          <div class="row">
-            <div class="col-sm-6 col-xs-12">
-              <figure>
-                {% thumbnail article.image "600x300" crop="center" as im %}
-                  <a href="{{ article.get_absolute_url }}"><img src="{{ im.url }}" class="img-responsive"></a>
-                {% endthumbnail %}
-              </figure>
-            </div>
-            <div class="col-sm-6 col-xs-12">
-              <section class="text-center full-section">
-                <h3 class="grid-title"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
-                <p class="grid-author">En <a href="">{{ article.section.name }}</a></p>
-                <p>{{ article.introduction|safe|truncatewords:20 }}</p>
-              </section>
+<div class="container">
+  <div class="content">
+    <section class="author-section section mt-4">
+      <header class="text-center">
+      {% thumbnail author.photo "100x100" crop="center" as im %}
+        <img src="{{ im.url }}" class="img-responsive mx-auto d-block">
+      {% endthumbnail %}
+      <h2>{{ author.name }}</h2>
+      </header>
+      <p class="author-bio">{{ author.bio|safe }}</p>
+      <hr />
+      <div class="row">
+        {% for article in author.article_set.all %}
+          <div class="col-12">
+            <div class="card article-card border-0">
+              <div class="row no-gutters">
+                <div class="col-sm-6 col-xs-12">
+                  {% thumbnail article.image "800x400" crop="center" as im %}
+                    <a href="{{ article.get_absolute_url }}"><img src="{{ im.url }}" class="img-fluid"></a>
+                  {% endthumbnail %}
+                </div>
+                <div class="col-sm-6 col-xs-12 p-4">
+                  <h4 class="article-title text-center"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h4>
+                  <p class="article-author text-center mb-4">Por <a href="{% url 'authors:detail' article.author.id %}">{{ article.author }}</a></p>
+                  <p class="pt-4">{{ article.introduction|striptags|safe|truncatewords:20 }}</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      {% endfor %}
-    </div>
-  </section>
-</div<
+        {% endfor %}
+      </div>
+    </section>
+  </div>
+</div>
 {% endblock %}
