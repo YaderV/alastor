@@ -102,3 +102,9 @@ class ArticleDetailView(DetailView):
         if is_draft and not request.user.is_authenticated():
             return redirect('articles:index')
         return super(ArticleDetailView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['other_articles'] = self.model.objects.exclude(
+            id=self.object.id).order_by('?')[:3]
+        return context

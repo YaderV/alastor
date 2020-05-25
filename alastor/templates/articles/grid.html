@@ -27,7 +27,7 @@
             <a href="{{ article.get_absolute_url }}"><img src="{{ im.url }}" class="card-img-top img-fluid"></a>
           {% endthumbnail %}
           <div class="card-body">
-            <h4 class="article-title text-center"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h4>
+            <h4 class="article-title text-center"><a href="{{ article.get_absolute_url }}">{{ article.title|truncatewords:10 }}</a></h4>
             <p class="article-author text-center">Por <a href="{% url 'authors:detail' article.author.id %}">{{ article.author }}</a></p>
             <p class="card-text text-justify">{{ article.introduction|striptags|safe|truncatewords:20 }}</p>
           </div>

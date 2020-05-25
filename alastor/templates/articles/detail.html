@@ -78,16 +78,32 @@
           <div class="clearfix"></div>
           <hr>
         {% endif %}
-        <h3>{% if article.translator %}Autor: {% endif %}<a class="author-name" href="#">{{ article.author.name }}</a></h3>
+        <h3>{% if article.translator %}Autor: {% endif %}<a class="author-name" href="{% url 'authors:detail' article.author.id %}">{{ article.author.name }}</a></h3>
         <figure class="pull-left">
           {% thumbnail article.author.photo "100x100" crop="center" as im %}
             <a href="#"><img src="{{ im.url }}" class="img-responsive img-circle"></a>
           {% endthumbnail %}
         </figure>
         {{ article.author.bio|safe|truncatewords_html:100 }}
-        <a href="#" class="btn btn-sm btn-secondary pull-right">Más del autor</a>
+        <a href="{% url 'authors:detail' article.author.id %}" class="btn btn-sm btn-secondary pull-right">Más del autor</a>
       </section>
       <div class="clearfix"></div>
+      <div class="row pt-4 mt-4">
+        {% for article in other_articles %}
+          <div class="col-sm-4 col-xs-12">
+            <div class="card article-card border-0">
+              {% thumbnail article.image "800x400" crop="center" as im %}
+                <a href="{{ article.get_absolute_url }}"><img src="{{ im.url }}" class="card-img-top img-fluid"></a>
+              {% endthumbnail %}
+              <div class="card-body">
+                <h4 class="article-title text-center"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h4>
+                <p class="article-author text-center">Por <a href="{% url 'authors:detail' article.author.id %}">{{ article.author }}</a></p>
+                <p class="card-text text-justify">{{ article.introduction|striptags|safe|truncatewords:10 }}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
     </footer>
   </article>
   {% endblock %}
