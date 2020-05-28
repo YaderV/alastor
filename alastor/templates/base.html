@@ -76,6 +76,7 @@
           </div>
         </nav>
       </header>
+      {% if editions %}
       <div class="version-list">
         {% for edition in editions %}
           <div class="version-box">
@@ -89,6 +90,7 @@
           </div>
         {% endfor %}
       </div>
+      {% endif %}
 
       <main role="main">
       {% block content %}

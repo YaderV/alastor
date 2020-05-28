@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 {% load thumbnail articles_tags %}
 {% block content %}
+<div id="edition-header" class="mt-4" style="background-image: url('{{ edition.cover.url }}');">
+  <div id="">
+  </div>
+  <div class="row h-100">
+   <div class="col-sm-12 my-auto">
+     <div id="edition-header-info" class="w-25 p-3">
+      <h2 class="text-center">Edición No. {{ edition.number }}</h2>
+      <p class="text-center">{{ edition.get_date }}</p>
+     </div>
+   </div>
+  </div>
+</div>
 <div>
   {% if narrativa %}
   <section class="section-list">
@@ -34,38 +46,40 @@
   {% endif %}
 </div>
 {% include "authors/author_block.html" %}
-<div class="align-middle">
-  <h2 class="mb-0 pt-4 pb-4 text-center text-uppercase">Publicaciones</h2>
-</div>
-<div class="p-4" id="publication-block">
-  <div class="container">
-    <div class="row">
-      {% for i in books %}
-        <div class="col-6">
-          <div class="card border-0 mb-4">
-            <div class="row no-gutters">
-              <div class="col-md-4">
-                {% thumbnail i.cover "600x800" crop="center" as im %}
-                  <img src="{{ im.url }}" class="card-img">
-                {% endthumbnail %}
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title"><a href="{% url 'authors:detail' i.id %}" class="book-title">{{ i.name }}</a></h5>
-                  <p class="card-text">{{ i.description|safe|truncatewords_html:15 }}</p>
-                  <p class="card-text"><small class="text-mute">{{ i.author.name }}</small></p>
-                  <a href="{% url 'authors:detail' i.id %}" class="btn btn-sm btn-secondary text-middle">Ver más</a>
+{% if books %}
+  <div class="align-middle">
+    <h2 class="mb-0 pt-4 pb-4 text-center text-uppercase">Publicaciones</h2>
+  </div>
+  <div class="p-4" id="publication-block">
+    <div class="container">
+      <div class="row">
+        {% for i in books %}
+          <div class="col-6">
+            <div class="card border-0 mb-4">
+              <div class="row no-gutters">
+                <div class="col-md-4">
+                  {% thumbnail i.cover "600x800" crop="center" as im %}
+                    <img src="{{ im.url }}" class="card-img">
+                  {% endthumbnail %}
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'authors:detail' i.id %}" class="book-title">{{ i.name }}</a></h5>
+                    <p class="card-text">{{ i.description|safe|truncatewords_html:15 }}</p>
+                    <p class="card-text"><small class="text-mute">{{ i.author.name }}</small></p>
+                    <a href="{% url 'authors:detail' i.id %}" class="btn btn-sm btn-secondary text-middle">Ver más</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-        </div>
-      {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
     </div>
+    <p class="text-center mt-2">
+      <a href="{% url 'publications:index' %}" class="btn btn-sm btn-secondary">Más publicaciones</a>
+    </p>
   </div>
-  <p class="text-center mt-2">
-    <a href="#" class="btn btn-sm btn-secondary">Más publicaciones</a>
-  </p>
-</div>
+{% endif %}
 {% endblock %}

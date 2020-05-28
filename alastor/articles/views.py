@@ -45,10 +45,12 @@ class ArticleListView(ArticleBaseView):
         context['author_list'] = self.author_list.filter(article__edition=self.edition)
         # context['author_old'] = self.author_list.exclude(article__edition=self.edition)
         context['books'] = Publication.objects.filter(promoted=True)[:4]
+        context['edition'] = self.edition
         return context
 
 
 class ArticleListEditionView(ArticleBaseView):
+    edition = None
 
     def dispatch(self, request, *args, **kwargs):
         is_draft = Edition.objects.filter(
@@ -59,6 +61,7 @@ class ArticleListEditionView(ArticleBaseView):
 
     def get_queryset(self):
         qs = super(ArticleListEditionView, self).get_queryset()
+        self.edition = Edition.objects.get(number=self.kwargs['number'])
         return qs.filter(edition__number=self.kwargs['number'])
 
     def get_context_data(self, **kwargs):
@@ -67,6 +70,7 @@ class ArticleListEditionView(ArticleBaseView):
             article__edition__number=self.kwargs['number'])
         context['author_old'] = self.author_list.exclude(
             article__edition__number=self.kwargs['number'])
+        context['edition'] = self.edition
         return context
 
 
@@ -74,20 +78,28 @@ class SectionListView(ListView):
     model = Article
     template_name = 'articles/section.html'
     context_object_name = 'articles'
+    paginate_by = 6
 
     def get_queryset(self):
         qs = super(SectionListView, self).get_queryset()
-        return qs.filter(section__slug=self.kwargs['slug'])
+        self.edition = Edition.objects.exclude(draft=True).first()
+        qs = qs.exclude(
+            section__slug=self.kwargs['slug'],
+            edition__draft=True,
+            edition=self.edition
+        ).select_related('author')
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super(SectionListView, self).get_context_data(**kwargs)
         context['editions'] = Edition.objects.exclude(draft=True)
         # TODO Write an accurate way to get latest edition
-        edition = Edition.objects.exclude(draft=True).first()
-        context['edition_articles'] = context['articles'].select_related(
-            'author').filter(edition=edition)
-        context['old_articles'] = context['articles'].exclude(
-            edition=edition).filter(edition__draft=False)
+        context['edition_articles'] = self.model.objects.filter(
+            section__slug=self.kwargs['slug'],
+            edition=self.edition
+        ).select_related('author')
+        context['section'] = Section.objects.get(
+            slug=self.kwargs['slug'])
 
         return context
 
