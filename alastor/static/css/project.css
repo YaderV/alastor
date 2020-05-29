@@ -307,3 +307,6 @@ header #section-nav .navbar-nav a:hover {
   background-color: #fff;
   margin-top: -200px;
 }
+#author-list a {
+  color: #df3331;
+}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block content %}
+<article class="main-article">
+  <h2 class="text-center p-4 mb-4">AUTORES</h2>
+  <div class="container" id="author-list">
+    <div class="row">
+      {% for i in authors_promoted %}
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+          <h5><a href="{% url 'authors:detail' i.id %}">{{ i.name|truncatechars:30 }}</a></h5>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="row">
+      {% for i in authors %}
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+          <h6><a href="{% url 'authors:detail' i.id %}">{{ i.name|truncatechars:30 }}</a></h6>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endblock %}
