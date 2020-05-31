@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block content %}
+<div class="container">
+  <div class="content">
+    <h2 class="mb-2 mt-4 text-center text-uppercase">{{ publication.name }}</h2>
+    <p class="text-center mb-3">{{ publication.author }}</p>
+    {% thumbnail publication.cover "250x350" crop="center" as im %}
+      <img src="{{ im.url }}" class="img-responsive mx-auto d-block">
+    {% endthumbnail %}
+    <p class="author-bio">{{ publication.description|safe }}</p>
+    <p class="text-center"><a href="{{ publication.archivo.url }}" target="_blank" class="btn btn-sm btn-secondary"><i class="fa fa-download"></i>  Descargar</a></p>
+  </div>
+</div>
+{% endblock %}

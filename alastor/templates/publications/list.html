@@ -15,12 +15,12 @@
                 {% endthumbnail %}
               </div>
               <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title"><a href="" class="book-title">{{ i.name|truncatewords:10 }}</a></h5>
+                <div class="card-body pt-0">
+                  <h5 class="card-title"><a href="{% url 'publications:detail' i.id %}" class="book-title">{{ i.name|truncatewords:10 }}</a></h5>
                   <p class="card-text">{{ i.description|safe|truncatewords_html:10 }}</p>
                   <p class="card-text"><small class="text-mute">{{ i.author.name }}</small></p>
                   <a href="{{ publication.archivo.url }}" target="_blank" class="btn btn-sm btn-secondary"><i class="fa fa-download"></i>  Descargar</a>
-                  <a href="{% url 'authors:detail' i.id %}" class="btn btn-sm btn-secondary text-middle">Ver más</a>
+                  <a href="{% url 'publications:detail' i.id %}" class="btn btn-sm btn-secondary text-middle">Ver más</a>
                 </div>
               </div>
             </div>

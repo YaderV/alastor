@@ -2,13 +2,11 @@
 {% load thumbnail %}
 {% block content %}
 <article class="main-article">
-  <header class="text-center">
-    <h2>{{ flatpage.title }}</h2>
-  </header>
+  <h2 class="text-center p-4 text-uppercase">{{ flatpage.title }}</h2>
   <div class="content">
-    <section class="body">
+    <div class="container">
       {{ flatpage.content|safe }}
-    </section>
+    </div>
   </div>
 </article>
 {% endblock %}

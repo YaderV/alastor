@@ -23,6 +23,7 @@ class ArticleBaseView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ArticleBaseView, self).get_context_data(**kwargs)
         context['editions'] = Edition.objects.exclude(draft=True)
+        context['index_flag'] = True
         for section in Section.objects.all():
             context.update({
                 section.slug: context['object_list'].filter(section=section)
