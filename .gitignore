@@ -58,7 +58,7 @@ node_modules/
 
 # User-uploaded media
 alastor/media/
-# staticfiles/
+staticfiles/
 # Hitch directory
 tests/.hitch
 
