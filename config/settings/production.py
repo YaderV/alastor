@@ -88,26 +88,26 @@ AWS_HEADERS = {
 # stored files.
 
 #  See:http://stackoverflow.com/questions/10390244/
-from storages.backends.s3boto import S3BotoStorage
+# from storages.backends.s3boto import S3BotoStorage
 
 
-class StaticRootS3BotoStorage(S3BotoStorage):
+# class StaticRootS3BotoStorage(S3BotoStorage):
 
-    def __init__(self, *args, **kwargs):
-        kwargs['location'] = 'static'
-        super(StaticRootS3BotoStorage, self).__init__(*args, **kwargs)
-
-
-class MediaRootS3BotoStorage(S3BotoStorage):
-
-    def __init__(self, *args, **kwargs):
-        kwargs['location'] = 'media'
-        super(MediaRootS3BotoStorage, self).__init__(*args, **kwargs)
+    # def __init__(self, *args, **kwargs):
+        # kwargs['location'] = 'static'
+        # super(StaticRootS3BotoStorage, self).__init__(*args, **kwargs)
 
 
-StaticRootS3BotoStorage = lambda: S3BotoStorage()
-MediaRootS3BotoStorage = lambda: S3BotoStorage()
-DEFAULT_FILE_STORAGE = 'config.settings.production.MediaRootS3BotoStorage'
+# class MediaRootS3BotoStorage(S3BotoStorage):
+
+    # def __init__(self, *args, **kwargs):
+        # kwargs['location'] = 'media'
+        # super(MediaRootS3BotoStorage, self).__init__(*args, **kwargs)
+
+
+# StaticRootS3BotoStorage = lambda: S3BotoStorage()
+# MediaRootS3BotoStorage = lambda: S3BotoStorage()
+# DEFAULT_FILE_STORAGE = 'config.settings.production.MediaRootS3BotoStorage'
 
 MEDIA_URL = 'https://s3.amazonaws.com/%s/media/' % AWS_STORAGE_BUCKET_NAME
 
@@ -115,7 +115,8 @@ MEDIA_URL = 'https://s3.amazonaws.com/%s/media/' % AWS_STORAGE_BUCKET_NAME
 # ------------------------
 
 STATIC_URL = 'https://s3.amazonaws.com/%s/static/' % AWS_STORAGE_BUCKET_NAME
-STATICFILES_STORAGE = 'config.settings.production.StaticRootS3BotoStorage'
+# STATICFILES_STORAGE = 'config.settings.production.StaticRootS3BotoStorage'
+STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
 # See: https://github.com/antonagestam/collectfast
 # For Django 1.7+, 'collectfast' should come before
