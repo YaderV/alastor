@@ -89,6 +89,8 @@ AWS_HEADERS = {
 
 #  See:http://stackoverflow.com/questions/10390244/
 from storages.backends.s3boto import S3BotoStorage
+
+
 class StaticRootS3BotoStorage(S3BotoStorage):
 
     def __init__(self, *args, **kwargs):
@@ -101,6 +103,7 @@ class MediaRootS3BotoStorage(S3BotoStorage):
     def __init__(self, *args, **kwargs):
         kwargs['location'] = 'media'
         super(MediaRootS3BotoStorage, self).__init__(*args, **kwargs)
+
 
 StaticRootS3BotoStorage = lambda: S3BotoStorage()
 MediaRootS3BotoStorage = lambda: S3BotoStorage()
