@@ -27,3 +27,4 @@ django-debug-toolbar==2.2
 django-extensions==2.2.7
 python-memcached==1.59
 django_select2==7.2.0
+whitenoise==5.1.0
