@@ -68,13 +68,14 @@
     <footer>
       <section class="author-bio pt-3">
         {% if article.translator %}
-          <h3>Traductor: <a href="#">{{ article.translator.name }}</a></h3>
+          <h3>Traductor: <a class="author-name" href="{% url 'authors:detail' article.translator.id %}">{{ article.translator.name }}</a></h3>
           <figure class="pull-left">
             {% thumbnail article.translator.photo "100x100" crop="center" as im %}
               <a href="#"><img src="{{ im.url }}" class="img-responsive img-circle"></a>
             {% endthumbnail %}
           </figure>
-          {{ article.translator.bio|safe }}
+          {{ article.translator.bio|safe|truncatewords_html:100 }}
+          <a href="{% url 'authors:detail' article.translator.id %}" class="btn btn-sm btn-secondary pull-right">Más del traductor</a>
           <div class="clearfix"></div>
           <hr>
         {% endif %}
