@@ -56,7 +56,7 @@ class ArticleListEditionView(ArticleBaseView):
     def dispatch(self, request, *args, **kwargs):
         is_draft = Edition.objects.filter(
             number=self.kwargs['number'], draft=True).exists()
-        if is_draft and not request.user.is_authenticated():
+        if is_draft and not request.user.is_authenticated:
             return redirect('articles:index')
         return super(ArticleListEditionView, self).dispatch(request, *args, **kwargs)
 
