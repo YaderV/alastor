@@ -38,7 +38,7 @@
       </section>
       <figure class="article-img">
         {% thumbnail article.image "700" as im %}
-          <img src="{{ im.url }}" class="img-responsive mx-auto d-block">
+          <img src="{{ im.url }}" class="img-fluid mx-auto d-block">
         {% endthumbnail %}
         {% if article.image_caption %}<figcaption class="text-center image-caption">{{ article.image_caption|safe }}</figcaption>{% endif %}
       </figure>
@@ -57,7 +57,7 @@
             {% for i in article.imagearticle_set.all %}
               <div>
                 {% thumbnail i.image "x600" as im %}
-                  <img src="{{ im.url }}" class="img-responsive" />
+                  <img src="{{ im.url }}" class="img-fluid" />
                 {% endthumbnail %}
               </div>
             {% endfor %}
@@ -71,7 +71,7 @@
           <h3>Traductor: <a class="author-name" href="{% url 'authors:detail' article.translator.id %}">{{ article.translator.name }}</a></h3>
           <figure class="pull-left">
             {% thumbnail article.translator.photo "100x100" crop="center" as im %}
-              <a href="#"><img src="{{ im.url }}" class="img-responsive img-circle"></a>
+              <a href="#"><img src="{{ im.url }}" class="img-fluid img-circle"></a>
             {% endthumbnail %}
           </figure>
           {{ article.translator.bio|safe|truncatewords_html:100 }}
@@ -82,7 +82,7 @@
         <h3>{% if article.translator %}Autor: {% endif %}<a class="author-name" href="{% url 'authors:detail' article.author.id %}">{{ article.author.name }}</a></h3>
         <figure class="pull-left">
           {% thumbnail article.author.photo "100x100" crop="center" as im %}
-            <a href="#"><img src="{{ im.url }}" class="img-responsive img-circle"></a>
+            <a href="#"><img src="{{ im.url }}" class="img-fluid img-circle"></a>
           {% endthumbnail %}
         </figure>
         {{ article.author.bio|safe|truncatewords_html:100 }}

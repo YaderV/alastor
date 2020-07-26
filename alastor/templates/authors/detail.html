@@ -6,7 +6,7 @@
     <section class="author-section section mt-4">
       <header class="text-center">
       {% thumbnail author.photo "100x100" crop="center" as im %}
-        <img src="{{ im.url }}" class="img-responsive mx-auto d-block">
+        <img src="{{ im.url }}" class="img-fluid mx-auto d-block">
       {% endthumbnail %}
       <h2>{{ author.name }}</h2>
       </header>
