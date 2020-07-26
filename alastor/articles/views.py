@@ -112,7 +112,7 @@ class ArticleDetailView(DetailView):
 
     def dispatch(self, request, *args, **kwargs):
         is_draft = self.get_object().edition.draft
-        if is_draft and not request.user.is_authenticated():
+        if is_draft and not request.user.is_authenticated:
             return redirect('articles:index')
         return super(ArticleDetailView, self).dispatch(request, *args, **kwargs)
 
