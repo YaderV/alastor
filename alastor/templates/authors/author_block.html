@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row pt-1">
       {% for author in author_list %}
-      <div class="col-sm-2 col-xs-6 mb-1">
+      <div class="col-sm-2 col-xs-6 col mb-1">
         {% thumbnail author.photo "100x100" crop="center" as im %}
           <a href="{% url 'authors:detail' author.id %}"><img src="{{ im.url }}" class="mx-auto d-block rounded"></a>
         {% endthumbnail %}
