@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% load thumbnail articles_tags %}
 {% block content %}
-<div id="edition-header" class="mt-4" style="background-image: url('{{ edition.cover.url }}');">
+
+{% thumbnail edition.cover "1200" as im %}
+<div id="edition-header" class="mt-4" style="background-image: url('{{ im.url }}');">
   <div id="">
   </div>
   <div class="row h-100">
@@ -13,6 +15,7 @@
    </div>
   </div>
 </div>
+{% endthumbnail %}
 <div>
   {% if narrativa %}
   <section class="section-list">

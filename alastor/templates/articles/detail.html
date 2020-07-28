@@ -22,8 +22,10 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.0/slick/slick-theme.css"/>
 {% endblock %}
 {% block content %}
-<div id="article-header" style="background-image: url('{{ article.image.url }}');">
+{% thumbnail article.image "1200" as im %}
+<div id="article-header" style="background-image: url('{{ im.url }}');">
 </div>
+{% endthumbnail %}
 <div id="article-content" class="container p-4">
   <article class="main-article">
     <header class="text-center">
