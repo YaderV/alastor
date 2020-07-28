@@ -159,6 +159,7 @@ header #section-nav .navbar-nav a:hover {
   text-align: center;
 }
 .main-article .body {
+  width: auto;
   font-size: 20px;
   text-align: justify;
 }
@@ -323,6 +324,7 @@ header #section-nav .navbar-nav a:hover {
     font-size: 16px !important;
   }
   .body img {
+    width: auto;
     max-width: 100% !important;
     height: auto !important;
   }
@@ -335,6 +337,7 @@ header #section-nav .navbar-nav a:hover {
     font-size: 20px !important;
   }
   .body img {
+    width: auto;
     max-width: 100% !important;
     height: auto !important;
   }
