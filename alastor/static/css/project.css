@@ -163,8 +163,8 @@ header #section-nav .navbar-nav a:hover {
   text-align: justify;
 }
 .main-article .body img {
-  width: auto;
-  height: auto;
+  width: auto !important;
+  height: auto !important;
 }
 .main-article .body-poesia {
   text-align: left !important;
