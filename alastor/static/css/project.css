@@ -159,9 +159,12 @@ header #section-nav .navbar-nav a:hover {
   text-align: center;
 }
 .main-article .body {
-  width: auto;
   font-size: 20px;
   text-align: justify;
+}
+.main-article .body img {
+  width: auto;
+  height: auto;
 }
 .main-article .body-poesia {
   text-align: left !important;
