@@ -162,8 +162,12 @@ header #section-nav .navbar-nav a:hover {
   font-size: 20px;
   text-align: justify;
 }
-.main-article .body p {
-  text-indent: 50px;
+.main-article .body-poesia {
+  text-align: left !important;
+  font-size: 16px !important;
+}
+.main-article .body-poesia p {
+  margin-bottom: 0 !important;
 }
 .main-article .article-img {
   margin-bottom: 30px;
@@ -315,9 +319,15 @@ header #section-nav .navbar-nav a:hover {
   #edition-header-info {
     width: 50% !important;
   }
+  .body-poesia {
+    font-size: 16px !important;
+  }
 }
 @media (min-width: 992px) and (min-width: 1200px) {
   #edition-header-info {
     width: 25% !important;
+  }
+  .body-poesia {
+    font-size: 20px !important;
   }
 }

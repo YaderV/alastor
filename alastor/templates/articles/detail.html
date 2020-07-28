@@ -42,7 +42,7 @@
         {% endthumbnail %}
         {% if article.image_caption %}<figcaption class="text-center image-caption">{{ article.image_caption|safe }}</figcaption>{% endif %}
       </figure>
-      <section class="body">
+      <section class="body{% if article.section.name == 'Poesía'%} body-poesia{% endif %}">
         {% if article.is_translation %}
         <div class="row">
           <div class="col-md-6">{{ article.translation_body|safe }}</div>
