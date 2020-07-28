@@ -2,7 +2,7 @@
 {% load thumbnail articles_tags %}
 {% block content %}
 
-{% thumbnail edition.cover "1200" as im %}
+{% thumbnail edition.cover "1400x400" as im %}
 <div id="edition-header" class="mt-4" style="background-image: url('{{ im.url }}');">
   <div id="">
   </div>
@@ -61,7 +61,7 @@
             <div class="card border-0 mb-4">
               <div class="row no-gutters">
                 <div class="col-md-4 mb-3">
-                  {% thumbnail i.cover "600x800" crop="center" as im %}
+                  {% thumbnail i.cover "300x400" crop="center" as im %}
                     <img src="{{ im.url }}" class="card-img img-fluid">
                   {% endthumbnail %}
                 </div>

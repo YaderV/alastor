@@ -23,7 +23,7 @@
     {% for article in articles %}
       <div class="{% if type == "double" %}col-sm-6{% elif type == "triple" %}col-sm-4{% endif %} col-xs-12">
         <div class="card article-card border-0">
-          {% thumbnail article.image "800x400" crop="center" as im %}
+          {% thumbnail article.image "670x400" crop="center" as im %}
             <a href="{{ article.get_absolute_url }}"><img src="{{ im.url }}" class="card-img-top img-fluid"></a>
           {% endthumbnail %}
           <div class="card-body">
