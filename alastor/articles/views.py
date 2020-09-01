@@ -9,15 +9,34 @@ class ArticleBaseView(ListView):
     model = Article
     template_name = 'articles/list.html'
     author_list = None
+    edition_list = None
+    current_edition = None
+    author_list = None
 
     def get_queryset(self):
         qs = super(ArticleBaseView, self).get_queryset()
-        return qs.select_related('author')
+        if self.request.user.is_authenticated:
+            self.edition_list = Edition.objects.all()
+        else:
+            self.edition_list = Edition.objects.exclude(draft=True)
+
+        if 'number' in self.kwargs:
+            self.current_edition = self.edition_list.get(
+                number=self.kwargs['number']
+            )
+        else:
+            self.current_edition = self.edition_list.first()
+
+        qs = qs.filter(edition=self.current_edition).select_related('author')
+        self.author_list = Author.objects.filter(article__in=qs)
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super(ArticleBaseView, self).get_context_data(**kwargs)
-        context['editions'] = Edition.objects.exclude(draft=True)
+        context['editions'] = self.edition_list
         context['index_flag'] = True
+        context['author_list'] = self.author_list
+        context['edition'] = self.current_edition
         for section in Section.objects.all():
             context.update({
                 section.slug: context['object_list'].filter(section=section)
@@ -27,44 +46,15 @@ class ArticleBaseView(ListView):
 
 
 class ArticleListView(ArticleBaseView):
-    edition = None
-
-    def get_queryset(self):
-        qs = super(ArticleListView, self).get_queryset()
-        # TODO Write an accurate way to get latest edition
-        self.edition = Edition.objects.exclude(draft=True).first()
-        return qs.filter(edition=self.edition)
 
     def get_context_data(self, **kwargs):
         context = super(ArticleListView, self).get_context_data(**kwargs)
-        context['author_list'] = Author.objects.filter(
-            article__edition=self.edition)
-        context['edition'] = self.edition
         context['books'] = Publication.objects.filter(promoted=True)[:4]
         return context
 
 
 class ArticleListEditionView(ArticleBaseView):
-    edition = None
-
-    def dispatch(self, request, *args, **kwargs):
-        is_draft = Edition.objects.filter(
-            number=self.kwargs['number'], draft=True).exists()
-        if is_draft and not request.user.is_authenticated:
-            return redirect('articles:index')
-        return super(ArticleListEditionView, self).dispatch(request, *args, **kwargs)
-
-    def get_queryset(self):
-        qs = super(ArticleListEditionView, self).get_queryset()
-        self.edition = Edition.objects.get(number=self.kwargs['number'])
-        return qs.filter(edition__number=self.kwargs['number'])
-
-    def get_context_data(self, **kwargs):
-        context = super(ArticleListEditionView, self).get_context_data(**kwargs)
-        context['author_list'] = Author.objects.filter(
-            article__edition__number=self.kwargs['number'])
-        context['edition'] = self.edition
-        return context
+    pass
 
 
 class SectionListView(ListView):
