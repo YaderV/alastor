@@ -55,7 +55,8 @@ class ArticleListView(ArticleBaseView):
 
     def get_context_data(self, **kwargs):
         context = super(ArticleListView, self).get_context_data(**kwargs)
-        context['books'] = Publication.objects.filter(promoted=True)[:4]
+        context['books'] = Publication.objects.filter(
+            promoted=True).select_related('author')[:4]
         return context
 
 
