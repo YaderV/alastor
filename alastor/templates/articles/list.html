@@ -17,36 +17,13 @@
 </div>
 {% endthumbnail %}
 <div>
-  {% if narrativa %}
-  <section class="section-list">
-    <h2 class="section-title no-margin-top">~ Narrativa ~</h2>
-    {% show_grid narrativa %}
-  </section>
-  {% endif %}
-  {% if poesia %}
-  <section class="section-list">
-    <h2 class="section-title">~ Poesía ~</h2>
-    {% show_grid poesia %}
-  </section>
-  {% endif %}
-  {% if impresiones %}
-  <section class="section-list">
-    <h2 class="section-title">~ Impresiones ~</h2>
-    {% show_grid impresiones %}
-  </section>
-  {% endif %}
-  {% if resena %}
-  <section class="section-list">
-    <h2 class="section-title">~ Reseña ~</h2>
-    {% show_grid resena %}
-  </section>
-  {% endif %}
-  {% if ensayo %}
-  <section class="section-list">
-    <h2 class="section-title">~ Ensayo ~</h2>
-    {% show_grid ensayo %}
-  </section>
-  {% endif %}
+  {% for section, articles in articles %}
+    <section class="section-list">
+      <h2 class="section-title no-margin-top">~ {{ section }} ~</h2>
+      {% show_grid articles as type %}
+      {% include 'articles/grid.html' %}
+    </section>
+  {% endfor %}
 </div>
 {% include "authors/author_block.html" %}
 {% if books %}

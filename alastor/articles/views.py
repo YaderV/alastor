@@ -1,3 +1,4 @@
+from collections import defaultdict
 from django.views.generic import ListView, DetailView
 from django.shortcuts import redirect
 from alastor.editions.models import Edition
@@ -27,8 +28,11 @@ class ArticleBaseView(ListView):
         else:
             self.current_edition = self.edition_list.first()
 
-        qs = qs.filter(edition=self.current_edition).select_related('author')
-        self.author_list = Author.objects.filter(article__in=qs)
+        qs = qs.filter(edition=self.current_edition).select_related(
+            'author', 'section'
+        ).order_by('section')
+        self.author_list = Author.objects.filter(
+            article__in=qs).distinct()
         return qs
 
     def get_context_data(self, **kwargs):
@@ -37,10 +41,12 @@ class ArticleBaseView(ListView):
         context['index_flag'] = True
         context['author_list'] = self.author_list
         context['edition'] = self.current_edition
-        for section in Section.objects.all():
-            context.update({
-                section.slug: context['object_list'].filter(section=section)
-            })
+
+        articles = defaultdict(list)
+        for i in context['article_list']:
+            articles[i.section.name].append(i)
+
+        context['articles'] = articles.items()
 
         return context
 

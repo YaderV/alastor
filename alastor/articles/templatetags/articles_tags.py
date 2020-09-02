@@ -3,17 +3,15 @@ from django import template
 register = template.Library()
 
 
-@register.inclusion_tag('articles/grid.html')
+# @register.inclusion_tag('articles/grid.html')
+@register.simple_tag
 def show_grid(articles):
 
-    if articles.count() == 1:
+    if len(articles) == 1:
         grid_type = 'full'
-    elif articles.count() % 2 == 0:
+    elif len(articles) % 2 == 0:
         grid_type = 'double'
     else:
         grid_type = 'triple'
 
-    return {
-        'articles': articles,
-        'type': grid_type
-    }
+    return grid_type
