@@ -12,7 +12,6 @@ class ArticleBaseView(ListView):
     author_list = None
     edition_list = None
     current_edition = None
-    author_list = None
 
     def get_queryset(self):
         qs = super(ArticleBaseView, self).get_queryset()
