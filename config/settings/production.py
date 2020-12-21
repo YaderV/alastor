@@ -223,13 +223,3 @@ ADMIN_URL = env('DJANGO_ADMIN_URL')
 
 # Your production stuff: Below this line define 3rd party library settings
 # THUMBNAIL_FORCE_OVERWRITE = True
-DEBUG = True
-MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
-INSTALLED_APPS += ('debug_toolbar', )
-INTERNAL_IPS = ['3.225.89.236', '34.198.255.223', '34.205.198.58', '34.234.81.220', '52.22.239.120', '52.54.16.202', '54.198.148.204']
-DEBUG_TOOLBAR_CONFIG = {
-    'DISABLE_PANELS': [
-        'debug_toolbar.panels.redirects.RedirectsPanel',
-    ],
-    'SHOW_TEMPLATE_CONTEXT': True,
-}
