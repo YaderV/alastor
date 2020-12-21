@@ -232,4 +232,3 @@ DEBUG_TOOLBAR_CONFIG = {
     ],
     'SHOW_TEMPLATE_CONTEXT': True,
 }
-
