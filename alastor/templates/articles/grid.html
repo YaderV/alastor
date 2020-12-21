@@ -12,7 +12,7 @@
           </div>
           <div class="col-sm-6 col-xs-12 p-4">
             <h4 class="article-title text-center"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h4>
-            <p class="article-author text-center mb-4">Por: <a href="{% url 'authors:detail' article.author.id %}">{{ article.author }}</a></p>
+            <p class="article-author text-center mb-4">Por <a href="{% url 'authors:detail' article.author.id %}">{{ article.author }}</a></p>
             <p class="pt-4">{{ article.introduction|striptags|safe|truncatewords:20 }}</p>
           </div>
         </div>
