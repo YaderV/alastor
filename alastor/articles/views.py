@@ -15,10 +15,7 @@ class ArticleBaseView(ListView):
 
     def get_queryset(self):
         qs = super(ArticleBaseView, self).get_queryset()
-        if self.request.user.is_authenticated:
-            self.edition_list = Edition.objects.all()
-        else:
-            self.edition_list = Edition.objects.exclude(draft=True)
+        self.edition_list = Edition.objects.exclude(draft=True)
 
         if 'number' in self.kwargs:
             self.current_edition = self.edition_list.get(
@@ -61,6 +58,46 @@ class ArticleListView(ArticleBaseView):
 
 class ArticleListEditionView(ArticleBaseView):
     pass
+
+class TestArticleListView(ListView):
+    model = Article
+    template_name = 'articles/list.html'
+    author_list = None
+    edition_list = None
+    current_edition = None
+
+    def get_queryset(self):
+        qs = super(TestArticleListView, self).get_queryset()
+        self.edition_list = Edition.objects.all()
+
+        if 'number' in self.kwargs:
+            self.current_edition = self.edition_list.get(
+                number=self.kwargs['number']
+            )
+        else:
+            self.current_edition = self.edition_list.first()
+
+        qs = qs.filter(edition=self.current_edition).select_related(
+            'author', 'section'
+        ).order_by('section')
+        self.author_list = Author.objects.filter(
+            article__in=qs).distinct()
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super(TestArticleListView, self).get_context_data(**kwargs)
+        context['editions'] = self.edition_list
+        context['index_flag'] = True
+        context['author_list'] = self.author_list
+        context['edition'] = self.current_edition
+
+        articles = defaultdict(list)
+        for i in context['article_list']:
+            articles[i.section.name].append(i)
+
+        context['articles'] = articles.items()
+
+        return context
 
 
 class SectionListView(ListView):
