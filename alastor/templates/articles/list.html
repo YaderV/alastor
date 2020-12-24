@@ -39,7 +39,7 @@
               <div class="row no-gutters">
                 <div class="col-md-4 mb-3">
                   {% thumbnail i.cover "300x400" crop="center" as im %}
-                    <img src="{{ im.url }}" class="card-img img-fluid">
+                    <img data-src="{{ im.url }}" class="card-img img-fluid lazyload">
                   {% endthumbnail %}
                 </div>
                 <div class="col-md-8">

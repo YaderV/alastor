@@ -7,7 +7,7 @@
         <div class="row no-gutters">
           <div class="col-sm-6 col-xs-12">
             {% thumbnail article.image "800x400" crop="center" as im %}
-              <a href="{{ article.get_absolute_url }}"><img src="{{ im.url }}" class="img-fluid"></a>
+              <a href="{{ article.get_absolute_url }}"><img data-src="{{ im.url }}" class="img-fluid lazyload"></a>
             {% endthumbnail %}
           </div>
           <div class="col-sm-6 col-xs-12 p-4">
@@ -24,7 +24,7 @@
       <div class="{% if type == "double" %}col-sm-6{% elif type == "triple" %}col-sm-4{% endif %} col-xs-12">
         <div class="card article-card border-0">
           {% thumbnail article.image "670x400" crop="center" as im %}
-            <a href="{{ article.get_absolute_url }}"><img src="{{ im.url }}" class="card-img-top img-fluid"></a>
+            <a href="{{ article.get_absolute_url }}"><img data-src="{{ im.url }}" class="card-img-top img-fluid lazyload"></a>
           {% endthumbnail %}
           <div class="card-body">
             <h4 class="article-title text-center"><a href="{{ article.get_absolute_url }}">{{ article.title|truncatewords:10 }}</a></h4>
