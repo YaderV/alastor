@@ -59,12 +59,18 @@ class ArticleListView(ArticleBaseView):
 class ArticleListEditionView(ArticleBaseView):
     pass
 
+
 class TestArticleListView(ListView):
     model = Article
     template_name = 'articles/list.html'
     author_list = None
     edition_list = None
     current_edition = None
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('articles:index')
+        return super(TestArticleListView, self).dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         qs = super(TestArticleListView, self).get_queryset()
