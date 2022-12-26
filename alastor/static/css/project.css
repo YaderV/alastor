@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css?family=EB+Garamond&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
 body {
-  font-family: 'Playfair Display', serif;
+  font-family: 'EB Garamond', serif;
 }
 .container-fluid {
   overflow: hidden;
@@ -115,6 +115,10 @@ header #section-nav .navbar-nav a:hover {
 .article-card .article-author a {
   color: #df3331;
 }
+.grid-intro {
+  font-size: 18px;
+  text-align: center !important;
+}
 .book-title {
   color: #000;
 }
@@ -159,7 +163,7 @@ header #section-nav .navbar-nav a:hover {
   text-align: center;
 }
 .main-article .body {
-  font-size: 20px;
+  font-size: 23px;
   text-align: justify;
 }
 .main-article .body img {

@@ -1,4 +1,5 @@
 from django.views.generic import DetailView, ListView
+
 from .models import Author
 
 
@@ -14,6 +15,8 @@ class AuthorDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['author_flag'] = True
+        articles = context['author'].article_set.all().order_by('-id')
+        context['author_articles'] = articles
         return context
 
 

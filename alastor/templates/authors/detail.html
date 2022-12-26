@@ -13,7 +13,7 @@
       <p class="author-bio">{{ author.bio|safe }}</p>
       <hr />
       <div class="row">
-        {% for article in author.article_set.all %}
+        {% for article in author_articles %}
           <div class="col-12 mb-3">
             <div class="card article-card border-0">
               <div class="row no-gutters">

@@ -11,9 +11,11 @@ urlpatterns = [
         name='index'),
     url(r'^test/$', TestArticleListView.as_view(), name='test-index'),
     url(r'^seccion/(?P<slug>[-\w]+)/$',
-        SectionListView.as_view(), name='section'),
+        cache_page(60 * 60)(SectionListView.as_view()),
+        name='section'),
     url(r'^edicion/(?P<number>[-\w]+)/$',
-        ArticleListEditionView.as_view(), name='edition'),
+        cache_page(60 * 60)(ArticleListEditionView.as_view()),
+        name='edition'),
     url(r'^articulo/(?P<slug>[-\w]+)/$',
         ArticleDetailView.as_view(), name='detail')
 ]
