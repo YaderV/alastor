@@ -21,6 +21,7 @@ class Edition(models.Model):
         ordering = ('-number',)
         verbose_name = u'Edición'
         verbose_name_plural = u'Ediciones'
+        app_label = 'editions'
 
     def get_date(self):
         return self.publication_date.strftime('%b %Y')
