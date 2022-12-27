@@ -16,6 +16,7 @@ ROOT_DIR = environ.Path(__file__) - 3  # (alastor/config/settings/common.py - 3 
 APPS_DIR = ROOT_DIR.path('alastor')
 
 env = environ.Env()
+environ.Env.read_env()
 
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
