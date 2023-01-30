@@ -15,7 +15,8 @@ class AuthorDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['author_flag'] = True
-        articles = context['author'].article_set.all().order_by('-id')
+        articles = context['author'].article_set.exclude(
+                hide=True).order_by('-id')
         context['author_articles'] = articles
         return context
 
@@ -29,7 +30,6 @@ class AuthoListView(ListView):
         context = super().get_context_data(**kwargs)
         context['authors_promoted'] = context['authors'].filter(
             promote=True)
-
         context['authors'] = context['authors'].exclude(
             promote=True)
         context['author_flag'] = True

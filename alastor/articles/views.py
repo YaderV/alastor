@@ -24,7 +24,8 @@ class ArticleBaseView(ListView):
         else:
             self.current_edition = self.edition_list.first()
 
-        qs = qs.filter(edition=self.current_edition).select_related(
+        qs = qs.filter(edition=self.current_edition).exclude(
+            hide=True).select_related(
             'author', 'section'
         ).order_by('section')
         self.author_list = Author.objects.filter(
@@ -118,7 +119,8 @@ class SectionListView(ListView):
         qs = qs.exclude(
             section__slug=self.kwargs['slug'],
             edition__draft=True,
-            edition=self.edition
+            edition=self.edition,
+            hide=True,
         ).select_related('author')
         return qs
 
@@ -129,7 +131,7 @@ class SectionListView(ListView):
         context['edition_articles'] = self.model.objects.filter(
             section__slug=self.kwargs['slug'],
             edition=self.edition
-        ).select_related('author')
+        ).exclude(hide=True).select_related('author')
         context['section'] = Section.objects.get(
             slug=self.kwargs['slug'])
 
@@ -143,6 +145,10 @@ class ArticleDetailView(DetailView):
 
     def dispatch(self, request, *args, **kwargs):
         is_draft = self.get_object().edition.draft
+        is_hide = self.get_object().hide
+        if is_hide:
+            return redirect('articles:index')
+
         if is_draft and not request.user.is_authenticated:
             return redirect('articles:index')
         return super(ArticleDetailView, self).dispatch(request, *args, **kwargs)

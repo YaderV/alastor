@@ -44,12 +44,12 @@ class ImageArticleInline(admin.StackedInline):
 class ArticleAdmin(admin.ModelAdmin):
     form = ArticleForm
     prepopulated_fields = {'slug': ('title',)}
-    list_display = ('title', 'author', 'section', 'edition')
+    list_display = ('title', 'author', 'section', 'edition', 'hide')
     inlines = [ImageArticleInline, ]
     fieldsets = (
         ('Texto', {'fields': ('title', 'slug', 'introduction', 'body',)}),
         ('Traduccion', {'fields': ('is_translation', 'translation_body', 'translator')}),
-        ('Detalles', {'fields': ('section', 'author', 'edition', 'image', 'image_caption')})
+        ('Detalles', {'fields': ('hide', 'section', 'author', 'edition', 'image', 'image_caption')})
     )
 
 

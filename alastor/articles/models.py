@@ -55,6 +55,8 @@ class Article(models.Model):
         blank=True, verbose_name=u'Descripción de imagen'
     )
 
+    hide = models.BooleanField(verbose_name=u'Ocultar', default=False)
+
     def get_absolute_url(self):
         return reverse('articles:detail', kwargs={'slug': self.slug})
 
